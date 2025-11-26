@@ -1,0 +1,221 @@
+/* components/integration/integration.component.css */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 36px;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.integration-card {
+    min-height: 350px;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.integration-card mat-card-content {
+    padding: 0;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.not-connected {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.not-connected .large-icon {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+    color: #ccc;
+    margin-bottom: 30px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.not-connected h2 {
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.not-connected p {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 16px;
+}
+
+.not-connected button {
+    padding: 16px 48px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    transition: all 0.3s ease;
+}
+
+.not-connected button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.connected {
+    padding: 0;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.success-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    color: #4caf50;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.status-info {
+    flex: 1;
+}
+
+.status-info h2 {
+    margin: 0 0 12px 0;
+    color: white;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.status-info p {
+    margin: 6px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+}
+
+.status-info p mat-icon {
+    vertical-align: middle;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.integration-content {
+    padding: 30px 40px;
+}
+
+mat-expansion-panel {
+    margin-bottom: 24px;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.panel-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.panel-actions button {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 24px;
+    font-size: 15px;
+}
+
+.view-data-section {
+    text-align: center;
+    padding: 30px 0 10px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.view-data-section button {
+    padding: 16px 48px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
+    transition: all 0.3s ease;
+}
+
+.view-data-section button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .status-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .success-icon {
+        font-size: 60px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .status-info h2 {
+        font-size: 24px;
+    }
+
+    .integration-content {
+        padding: 20px;
+    }
+
+    .panel-actions {
+        flex-direction: column;
+    }
+
+    .panel-actions button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,72 @@
+<!-- components/integration/integration.component.html -->
+<div class="container">
+    <h1>GitHub Integration</h1>
+
+    <mat-card class="integration-card" elevation="8">
+        <mat-card-content>
+            <div class="spinner-container" *ngIf="isLoading">
+                <mat-spinner diameter="60"></mat-spinner>
+            </div>
+
+            <div *ngIf="!isLoading && !isConnected" class="not-connected">
+                <mat-icon class="large-icon">cloud_off</mat-icon>
+                <h2>Not Connected</h2>
+                <p>Connect your GitHub account to start syncing repository data</p>
+                <button mat-raised-button color="primary" (click)="connect()">
+                    <mat-icon>link</mat-icon>
+                    Connect GitHub
+                </button>
+            </div>
+
+            <div *ngIf="!isLoading && isConnected" class="connected">
+                <div class="status-header">
+                    <mat-icon class="success-icon">check_circle</mat-icon>
+                    <div class="status-info">
+                        <h2>Successfully Connected</h2>
+                        <p>
+                            <mat-icon>calendar_today</mat-icon>
+                            Connected on {{ integration?.connectedAt | date:'medium' }}
+                        </p>
+                        <p *ngIf="integration?.username">
+                            <mat-icon>person</mat-icon>
+                            User: {{ integration.username }}
+                        </p>
+                        <p *ngIf="integration?.lastSyncedAt">
+                            <mat-icon>sync</mat-icon>
+                            Last synced: {{ integration.lastSyncedAt | date:'short' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="integration-content">
+                    <mat-expansion-panel [(expanded)]="panelOpenState">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-icon>settings</mat-icon>
+                                Integration Options
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="panel-actions">
+                            <button mat-stroked-button color="primary" (click)="resyncIntegration()">
+                                <mat-icon>sync</mat-icon>
+                                Re-sync Integration
+                            </button>
+                            <button mat-stroked-button color="warn" (click)="removeIntegration()">
+                                <mat-icon>delete</mat-icon>
+                                Remove Integration
+                            </button>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <div class="view-data-section">
+                        <button mat-raised-button color="accent" (click)="viewData()">
+                            <mat-icon>table_view</mat-icon>
+                            View GitHub Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
