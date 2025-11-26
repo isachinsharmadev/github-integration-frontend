@@ -18,8 +18,19 @@ import {
   IDatasource,
   IGetRowsParams,
   GridApi,
+  ModuleRegistry,
 } from 'ag-grid-community';
+import { ClientSideRowModelModule } from 'ag-grid-community';
+import { InfiniteRowModelModule } from 'ag-grid-community';
+import { CsvExportModule } from 'ag-grid-community';
 import { GithubService } from '../../services/github.service';
+
+// Register AG Grid modules
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  InfiniteRowModelModule,
+  CsvExportModule,
+]);
 
 @Component({
   selector: 'app-data-view',
@@ -104,11 +115,6 @@ export class DataViewComponent implements OnInit {
     console.log('Collection changed to:', this.selectedCollection);
     this.isLoading = true;
 
-    // Clear existing data first
-    if (this.gridApi) {
-      this.gridApi.setGridOption('datasource', undefined);
-    }
-
     this.githubService.getCollectionFields(this.selectedCollection).subscribe({
       next: (response) => {
         console.log('Fields response:', response);
@@ -123,11 +129,18 @@ export class DataViewComponent implements OnInit {
         this.buildColumnDefs(response.fields);
         console.log('Column defs built:', this.columnDefs.length);
 
-        // Small delay to ensure grid is ready
+        // Wait for next tick to ensure DOM updates
         setTimeout(() => {
-          this.setupDataSource();
+          if (this.gridApi) {
+            console.log('Grid API available, setting up datasource');
+            this.setupDataSource();
+          } else {
+            console.warn(
+              'Grid API not available yet, will setup on grid ready'
+            );
+          }
           this.isLoading = false;
-        }, 100);
+        }, 0);
       },
       error: (error) => {
         console.error('Error loading fields:', error);
