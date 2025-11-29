@@ -48,25 +48,20 @@ export class GithubService {
     search?: string,
     filters?: any
   ): Observable<any> {
-    let params = new HttpParams()
-      .set('page', page.toString())
-      .set('pageSize', pageSize.toString());
+    // Build request body with all parameters
+    const body = {
+      page,
+      pageSize,
+      sortField: sortField || undefined,
+      sortOrder: sortOrder || 'asc',
+      search: search || '',
+      filters: filters || {},
+    };
 
-    if (sortField) {
-      params = params.set('sortField', sortField);
-    }
-    if (sortOrder) {
-      params = params.set('sortOrder', sortOrder);
-    }
-    if (search) {
-      params = params.set('search', search);
-    }
-    if (filters) {
-      params = params.set('filters', JSON.stringify(filters));
-    }
-
-    return this.http.get(`${this.apiUrl}/data/collection/${collectionName}`, {
-      params,
-    });
+    // Use POST method to send filters in request body
+    return this.http.post(
+      `${this.apiUrl}/data/collection/${collectionName}`,
+      body
+    );
   }
 }
